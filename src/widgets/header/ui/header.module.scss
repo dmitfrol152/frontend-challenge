@@ -1,0 +1,6 @@
+@use '/src/shared/styles/global/variables' as *;
+
+.header {
+  background-color: $color-header-background;
+  box-shadow: 0px 4px 4px 0px $color-shadow-02;
+}
