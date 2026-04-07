@@ -1,4 +1,14 @@
-.idea
-node_modules/
-*.tsbuildinfo
+# Logs
+logs
+*.log
+npm-debug.log*
 
+node_modules
+dist
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
