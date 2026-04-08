@@ -1,0 +1,49 @@
+@use '/src/shared/styles/global/variables' as *;
+
+.catList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  &__text {
+    font-family: $ff-main;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: $color-black;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 48px;
+  }
+
+  &__loading {
+    font-family: $ff-main;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.25px;
+    text-align: center;
+    color: $color-black;
+  }
+
+  &__observer {
+    height: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

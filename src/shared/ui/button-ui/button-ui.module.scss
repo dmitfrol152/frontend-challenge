@@ -1,0 +1,41 @@
+@use '/src/shared/styles/global/variables' as *;
+
+.button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonSizeS {
+  padding: 0;
+}
+
+.buttonSizeM {
+  padding: 5px 10px;
+}
+
+.buttonVariantMain {
+  background-color: $color-btn-background;
+  color: $color-white;
+  transition: background-color $transition-300;
+
+  &:focus-visible {
+    outline: none;
+    background-color: $color-btn-active;
+  }
+
+  &:hover {
+    background-color: $color-btn-active;
+  }
+
+  &:active {
+    background-color: $color-btn-click;
+  }
+}

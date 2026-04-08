@@ -9,7 +9,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <Suspense fallback={<div className={styles.app}>Loading...</div>}>
+        <Suspense fallback={<div className={styles.app}>Загрузка...</div>}>
           <AppRouter />
         </Suspense>
       </QueryClientProvider>

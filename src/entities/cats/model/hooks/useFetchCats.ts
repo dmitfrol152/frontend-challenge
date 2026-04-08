@@ -2,15 +2,33 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchCats } from '@entities/cats/api/fetchCats';
 
 export function useFetchCats() {
-  const queryFetchCats = useInfiniteQuery({
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    data,
+    refetch,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
     queryKey: ['cats'],
     queryFn: ({ pageParam }) => fetchCats(pageParam),
     initialPageParam: 0,
     staleTime: 1000 * 60 * 5,
-    getPreviousPageParam: (firstPage) => {
-
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length > 0 ? allPages.length : undefined;
     },
-    getNextPageParam: (lastPage) => {
-
   });
+
+  return {
+    isError,
+    isLoading,
+    isSuccess,
+    data,
+    refetch,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  };
 }

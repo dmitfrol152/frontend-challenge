@@ -1,10 +1,13 @@
 import { BASE_URL } from '@/shared/lib/constants/BASE_URL';
 import type { CatsProps } from '../model/types';
 
-export async function fetchCats(): Promise<CatsProps> {
+export async function fetchCats(
+  pageParam: number,
+  limit: number = 15,
+): Promise<CatsProps[]> {
   try {
     const response = await fetch(
-      `${BASE_URL}/images/search?page=${page}&limit=${limit}`,
+      `${BASE_URL}/images/search?page=${pageParam}&limit=${limit}`,
       {
         method: 'GET',
         headers: {
