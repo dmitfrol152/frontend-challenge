@@ -1,0 +1,38 @@
+name: Deploy
+
+on:
+  push:
+    branches: 'master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: i node
+        uses: actions/setup-node@v4
+
+      - name: i dep
+        run: npm install
+
+      - name: build
+        run: npm run build
+
+      - name: artifacts
+        uses: actions/upload-pagesartifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
