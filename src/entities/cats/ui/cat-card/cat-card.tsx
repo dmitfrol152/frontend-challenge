@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './cat-card.module.scss';
 import type { CatCardProps } from './types';
 import clsx from 'clsx';
 
-export function CatCard({ cat, toggleFavorites }: CatCardProps) {
+export const CatCard = React.memo(({ cat, ToggleFavorites }: CatCardProps) => {
   const [statusLoadImg, setStatusLoadImg] = useState<
     'loading' | 'error' | 'success'
   >('loading');
@@ -32,9 +32,11 @@ export function CatCard({ cat, toggleFavorites }: CatCardProps) {
         onLoad={() => setStatusLoadImg('success')}
         style={{ opacity: statusLoadImg === 'success' ? '1' : '0' }}
       />
-      {toggleFavorites && (
-        <div className={styles.cat__btn}>{toggleFavorites(cat)}</div>
+      {ToggleFavorites && (
+        <div className={styles.cat__btn}>
+          <ToggleFavorites cat={cat} />
+        </div>
       )}
     </article>
   );
-}
+});

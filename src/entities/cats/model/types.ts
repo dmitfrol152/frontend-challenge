@@ -8,3 +8,13 @@ export const CatsSchema = z.object({
 });
 
 export type CatsProps = z.infer<typeof CatsSchema>;
+
+export const CatsFavoritesStoreSchema = z.object({
+  favorites: z.array(CatsSchema),
+  toggleFavorite: z.function({
+    input: [CatsSchema],
+    output: z.void(),
+  }),
+});
+
+export type CatsFavoritesStoreProps = z.infer<typeof CatsFavoritesStoreSchema>;

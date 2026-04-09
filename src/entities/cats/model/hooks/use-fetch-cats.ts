@@ -17,7 +17,8 @@ export function useFetchCats() {
     initialPageParam: 0,
     staleTime: 1000 * 60 * 5,
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.length > 0 ? allPages.length : undefined;
+      if (lastPage.length < 15) return undefined;
+      return allPages.length;
     },
   });
 

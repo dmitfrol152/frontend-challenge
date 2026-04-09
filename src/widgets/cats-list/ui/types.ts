@@ -3,12 +3,14 @@ import z from 'zod';
 
 export const CatsListSchema = z.object({
   data: z.array(z.array(CatsSchema)),
-  hasNextPage: z.boolean(),
-  isFetchingNextPage: z.boolean(),
-  onFetchNextPage: z.function({
-    input: [],
-    output: z.void(),
-  }),
+  hasNextPage: z.boolean().optional(),
+  isFetchingNextPage: z.boolean().optional(),
+  onFetchNextPage: z
+    .function({
+      input: [],
+      output: z.void(),
+    })
+    .optional(),
 });
 
 export type CatsListProps = z.infer<typeof CatsListSchema>;

@@ -1,25 +1,11 @@
-import type { CatsProps } from '@/entities/cats/model/types';
-import { useEffect, useState } from 'react';
+import { useFavoritesStore } from '@/entities/cats/model/hooks/use-favorites-store';
 
 export function useFavorites() {
-  const [favorites, setFavorites] = useState<CatsProps[]>(() => {
-    const favoritesLocalStorage = localStorage.getItem('favorites-cats');
-    return favoritesLocalStorage ? JSON.parse(favoritesLocalStorage) : [];
-  });
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+  const favorites = useFavoritesStore((state) => state.favorites);
 
-  useEffect(() => {
-    localStorage.setItem('favorites-cats', JSON.stringify(favorites));
-  }, [favorites]);
+  const isFavorites = (id: string) =>
+    favorites.some((favorite) => favorite.id === id);
 
-  const isFavorites = (id: string) => favorites.some((cat) => cat.id === id);
-
-  const toggleFavorites = (cat: CatsProps) => {
-    setFavorites((prev) => {
-      return isFavorites(cat.id)
-        ? prev.filter((prevCat) => prevCat.id !== cat.id)
-        : [...prev, cat];
-    });
-  };
-
-  return { isFavorites, toggleFavorites };
+  return { isFavorites, toggleFavorite, favorites };
 }

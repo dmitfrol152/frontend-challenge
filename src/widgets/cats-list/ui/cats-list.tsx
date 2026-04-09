@@ -3,25 +3,31 @@ import { CatCard } from '@/entities/cats/ui/cat-card/cat-card';
 import styles from './cats-list.module.scss';
 import { ToggleFavorites } from '@/features/toggle-favorites/ui/toggle-favorites';
 import { useInView } from '@/shared/lib/hooks/use-in-view';
-import { useEffect } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
+import type { CatsListProps } from './types';
 
 export function CatsList({
   data,
   hasNextPage,
   isFetchingNextPage,
   onFetchNextPage,
-}: {
-  data: CatsProps[][];
-  hasNextPage: boolean;
-  isFetchingNextPage: boolean;
-  fetchNextPage: () => CatsProps[][];
-}) {
-  const { isView, ref } = useInView(0.1);
+}: CatsListProps) {
+  const { isView, ref } = useInView(0.5);
+  const wasInViewRef = useRef(false);
 
-  const allCats = data.flat() || [];
+  const allCats = useMemo(() => data.flat() || [], [data]);
 
   useEffect(() => {
-    if (isView && hasNextPage && !isFetchingNextPage) {
+    const wasInView = wasInViewRef.current;
+    wasInViewRef.current = isView;
+
+    if (
+      !wasInView &&
+      isView &&
+      hasNextPage &&
+      !isFetchingNextPage &&
+      onFetchNextPage
+    ) {
       onFetchNextPage();
     }
   }, [onFetchNextPage, hasNextPage, isFetchingNextPage, isView]);
@@ -40,10 +46,7 @@ export function CatsList({
         {allCats.map((cat: CatsProps) => {
           return (
             <li key={cat.id}>
-              <CatCard
-                cat={cat}
-                toggleFavorites={(cat) => <ToggleFavorites cat={cat} />}
-              />
+              <CatCard cat={cat} ToggleFavorites={ToggleFavorites} />
             </li>
           );
         })}

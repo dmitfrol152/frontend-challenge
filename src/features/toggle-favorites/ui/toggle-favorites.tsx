@@ -4,15 +4,14 @@ import IconFavoriteFill from '@shared/assets/image/svg/icon-favorite-fill.svg?re
 import styles from './toggle-favorites.module.scss';
 import type { CatsProps } from '@/entities/cats/model/types';
 import { useFavorites } from '../model/hooks/use-favorites';
+import React from 'react';
 
-export function ToggleFavorites({ cat }: { cat: CatsProps }) {
-  const { toggleFavorites, isFavorites } = useFavorites();
+export const ToggleFavorites = React.memo(({ cat }: { cat: CatsProps }) => {
+  const { isFavorites, toggleFavorite } = useFavorites();
 
   const handleToggleFavorites = () => {
-    toggleFavorites(cat);
+    toggleFavorite(cat);
   };
-
-  const haveFavorites = isFavorites(cat.id);
 
   return (
     <ButtonUi
@@ -22,7 +21,7 @@ export function ToggleFavorites({ cat }: { cat: CatsProps }) {
       onClick={handleToggleFavorites}
       aria-label="Добавить в избранное"
     >
-      {haveFavorites ? (
+      {isFavorites(cat.id) ? (
         <IconFavoriteFill />
       ) : (
         <>
@@ -32,4 +31,4 @@ export function ToggleFavorites({ cat }: { cat: CatsProps }) {
       )}
     </ButtonUi>
   );
-}
+});

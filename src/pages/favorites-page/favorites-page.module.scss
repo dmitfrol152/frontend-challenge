@@ -1,0 +1,18 @@
+@use '/src/shared/styles/global/variables' as *;
+
+.favoritesPage {
+  padding: 48px 0 31px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  &__text {
+    font-family: $ff-main;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: $color-black;
+  }
+}

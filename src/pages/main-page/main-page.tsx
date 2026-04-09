@@ -1,7 +1,8 @@
 import { ButtonUi } from '@/shared/ui/button-ui';
 import styles from './main-page.module.scss';
-import { useFetchCats } from '@/entities/cats/model/hooks/useFetchCats';
+import { useFetchCats } from '@/entities/cats/model/hooks/use-fetch-cats';
 import { LayoutMainPage } from './ui/layout-main-page';
+import { useCallback } from 'react';
 
 export function MainPage() {
   const {
@@ -19,9 +20,9 @@ export function MainPage() {
     refetchHomePage();
   };
 
-  const handleFetchNextPage = () => {
+  const handleFetchNextPage = useCallback(() => {
     fetchNextPageHomePage();
-  };
+  }, [fetchNextPageHomePage]);
 
   if (isErrorMainPage) {
     return (

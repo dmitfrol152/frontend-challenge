@@ -1,13 +1,11 @@
 import z from 'zod';
 import { CatsSchema } from '../../model/types';
-import type { ReactNode } from 'react';
+import type { ComponentType } from 'react';
 
 export const CatCardSchema = z.object({
   cat: CatsSchema,
-  toggleFavorites: z.function({
-    input: [CatsSchema],
-    output: z.custom<ReactNode>(),
-  }),
+  ToggleFavorites:
+    z.custom<ComponentType<{ cat: z.infer<typeof CatsSchema> }>>(),
 });
 
 export type CatCardProps = z.infer<typeof CatCardSchema>;
