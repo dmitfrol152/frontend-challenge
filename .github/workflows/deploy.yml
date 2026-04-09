@@ -22,7 +22,7 @@ jobs:
         run: npm run build
 
       - name: artifacts
-        uses: actions/upload-pagesartifact@v3
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
