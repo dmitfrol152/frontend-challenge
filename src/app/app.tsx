@@ -7,7 +7,7 @@ import { queryClient } from '@app/providers/queryClient ';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/frontend-challenge">
       <QueryClientProvider client={queryClient}>
         <Suspense fallback={<div className={styles.app}>Загрузка...</div>}>
           <AppRouter />
