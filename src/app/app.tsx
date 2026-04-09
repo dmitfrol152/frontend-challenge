@@ -6,7 +6,8 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './providers/queryClient';
 
 export default function App() {
-  const basename = import.meta.env.PROD ? '/frontend-challenge' : '/';
+  const basename =
+    import.meta.env.MODE === 'production' ? '/frontend-challenge' : '/';
 
   return (
     <BrowserRouter basename={basename}>
